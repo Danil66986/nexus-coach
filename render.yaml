@@ -1,0 +1,16 @@
+# Déploiement gratuit sur Render (« Blueprint »). Aucun secret ici : tu les saisis dans l'interface de Render.
+services:
+  - type: web
+    name: nexus-coach
+    runtime: docker
+    plan: free              # instance gratuite : elle s'endort après 15 min sans appel et se réveille toute seule
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false         # à saisir dans Render
+      - key: SUPABASE_ANON_KEY
+        sync: false         # clé publique « anon / publishable », jamais service_role
+      - key: GEMINI_API_KEY
+        sync: false         # optionnel : laisse vide pour un coach sans IA
+      - key: COACH_TZ
+        value: Europe/Paris
